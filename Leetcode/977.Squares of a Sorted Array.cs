@@ -1,5 +1,15 @@
-public class Solution
-{
+public class Solution {
+    // Approach: Square and Sort (O(n log n)) - 26ms
+    public int[] SortedSquares(int[] nums)
+    {
+        for (int i = 0; i < nums.Length; i++)
+        {
+            nums[i] *= nums[i];
+        }
+        Array.Sort(nums);
+        return nums;
+    }
+    // Best Approach: Two Pointers (O(n)) - 1ms
     public int[] SortedSquares(int[] nums){
         int n = nums.Length;
         int l = 0, r = n - 1;
@@ -19,19 +29,4 @@ public class Solution
         return ans;
     }
 
-    public static void Main(string[] args)
-    {
-        int n = Convert.ToInt32(Console.ReadLine());
-        int[] nums = new int[n];
-        for (int i = 0; i < n; i++)
-        {
-            nums[i] = Convert.ToInt32(Console.ReadLine());
-        }
-        int [] ans = new Solution().SortedSquares(nums);
-        foreach(int i in ans)
-        {
-            Console.Write(i + " " );
-        }
-
-    }
 }
