@@ -1,20 +1,15 @@
 public class Solution
 {
-    public int[] SortedSquares(int[] nums){
+    public int MaxSubArray(int[] nums) {
         int n = nums.Length;
-        int l = 0, r = n - 1;
-        int[] ans = new int[n];
-        for (int i = n - 1; i >= 0; i--)
-        {
-            if (Math.Abs(nums[l]) < Math.Abs(nums[r]))
-            {
-                ans[i] = nums[r] * nums[r--];
-            }
-            else
-            {
-                ans[i] = nums[l] * nums[l++];
-            }
+        Int32 ans = Int32.MinValue;
+        Int32 temp = 0;
 
+        for (int i = 0; i < n; i++)
+        {
+            temp += nums[i];
+            ans = int.Max(temp, ans);
+            if (temp < 0) temp = 0;
         }
         return ans;
     }
@@ -27,11 +22,10 @@ public class Solution
         {
             nums[i] = Convert.ToInt32(Console.ReadLine());
         }
-        int [] ans = new Solution().SortedSquares(nums);
-        foreach(int i in ans)
-        {
-            Console.Write(i + " " );
-        }
+        int ans = new Solution().MaxSubArray(nums);
+        
+        Console.WriteLine(ans);
+        
 
     }
 }
