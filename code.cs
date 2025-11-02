@@ -1,31 +1,33 @@
 public class Solution
 {
-    public int MaxSubArray(int[] nums) {
-        int n = nums.Length;
-        Int32 ans = Int32.MinValue;
-        Int32 temp = 0;
-
-        for (int i = 0; i < n; i++)
+    public int LengthOfLongestSubstring(string s) {
+        //dictionary approach
+        int n = s.Length;
+        Dictionary<char, int> dict = new Dictionary<char, int>();
+        int l = 0, ans = 0, r = 0;
+        while (r < n)
         {
-            temp += nums[i];
-            ans = int.Max(temp, ans);
-            if (temp < 0) temp = 0;
+            if (dict.ContainsKey(s[r]))
+            {
+                // Console.WriteLine("Character " + s[r] + " found at index " + dict[s[r]]);
+                l = Math.Max(dict[s[r]] + 1, l);
+                // Console.WriteLine("l updated to: " + l);
+            }
+            dict[s[r]] = r;
+            // Console.WriteLine("dict updated: " + s[r] + " -> " + r);
+            ans = Math.Max(ans, r - l + 1);
+            // Console.WriteLine("ans updated to: " + ans);
+            r++;
         }
         return ans;
     }
 
     public static void Main(string[] args)
     {
-        int n = Convert.ToInt32(Console.ReadLine());
-        int[] nums = new int[n];
-        for (int i = 0; i < n; i++)
-        {
-            nums[i] = Convert.ToInt32(Console.ReadLine());
-        }
-        int ans = new Solution().MaxSubArray(nums);
-        
-        Console.WriteLine(ans);
-        
-
+        string s;
+        s = Console.ReadLine();
+        Solution sol = new Solution();
+        int res = sol.LengthOfLongestSubstring(s);
+        Console.WriteLine(res);
     }
 }
